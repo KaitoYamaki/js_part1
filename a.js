@@ -91,13 +91,13 @@ class RejectedBocchanBookShelf extends Bookshelf {
   }
 }
 
-let bookshelf = new LimitedBookshelf;
+const bookshelf = new LimitedBookshelf;
 
 bookshelf.addBook(new Book("坊ちゃん", 520));
 bookshelf.addBook(new Book("我輩は猫である", 454));
 bookshelf.addBook(new Book("こころ", 876));
 
-let bookshelf2 = new RejectedBocchanBookShelf;
+const bookshelf2 = new RejectedBocchanBookShelf;
 
 if (!bookshelf2.addBook(new Book("坊っちゃん", 520))) {
   console.log(`坊っちゃんを追加できませんでした`);
