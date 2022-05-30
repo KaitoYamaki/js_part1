@@ -91,8 +91,6 @@ class Book {
     }
   }
   
-
-  
   const bookshelf = new LimitedBookshelf;
   
   bookshelf.addBook(new Book("坊ちゃん", 520));
