@@ -88,6 +88,7 @@ class RejectedBocchanBookShelf extends Bookshelf {
     if(book.title === '坊っちゃん'){
       return false;
     }
+    return true;
   }
 }
 
@@ -101,4 +102,6 @@ const bookshelf2 = new RejectedBocchanBookShelf;
 
 if (!bookshelf2.addBook(new Book("坊っちゃん", 520))) {
   console.log(`坊っちゃんを追加できませんでした`);
+} else {
+  console.log('追加できました。')
 }

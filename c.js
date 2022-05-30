@@ -91,14 +91,17 @@ class Book {
       return true;
     }
   }
-
+  
   const bookshelf = new LimitedBookshelf;
   
   bookshelf.addBook(new Book("坊ちゃん", 520));
   bookshelf.addBook(new Book("我輩は猫である", 454));
   bookshelf.addBook(new Book("こころ", 876));
   
-  if (!bookshelf2.addBook(new Book("坊ちゃん", 520))) {
+  const bookshelf2 = new ThinBookShelf;
+
+  
+  if (bookshelf2.addBook(new Book("坊ちゃん", 520))) {
     console.log('ページ数が多いです');
   }
   
