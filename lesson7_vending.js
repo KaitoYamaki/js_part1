@@ -8,6 +8,16 @@ class Item {
   }
 
   getItemName() {
-    return this
+    return this.#itemName
+  }
+
+  getPrice() {
+    return this.#price
+  }
+}
+
+class VendingMachine {
+  constructor() {
+    this.items = [];
   }
 }
