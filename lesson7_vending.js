@@ -1,19 +1,19 @@
 class Item {
   // 堅牢性を高める(動作確認済み)
-  #productName
-  #cash
+  productName
+  cash
 
   constructor(productName, cash) {
-    this.#productName = productName;
-    this.#cash = cash;
+    this.productName = productName;
+    this.cash = cash;
   }
 
   getProductName() {
-    return this.#productName
+    return this.productName
   }
 
   getCash() {
-    return this.#cash;
+    return this.cash;
   }
 }
 
@@ -23,37 +23,43 @@ class VendingMachine {
   }
 
   addItem(item, num) {
-    for(let i = 0; i < num; i++) {
-      this.items.push(item);
+    const items = this.items.filter(function(item) { return item.name === item.name });
+    const cashes = items.map(function(item) { return item.cash  });  // [120, 120]
+    if(cashes[0] !== item.cash) // or cashes[0]  !== item.cash
+      for(let i = 0; i < num; i++) {
+        this.items.push(item);
     }
   }
 
+
+
   findItemList(productName) {
-    const item = this.items.filter(function (value) {
+    const items = this.items.filter(function (value) {
       return value.getProductName() === productName
     })
-    return item
+    return items
   }
 
   buy(productName, cash) {
-    const item = this.findItemList(productName);
-    if (item.length === 0) { throw new Error('在庫がありません'); }
-    if (item[0].getCash() > cash) { throw new Error('お金が足りません'); }
-    this.items.splice(this.items.indexOf(item[0]), 1);
+    let items = this.findItemList(productName);
+    if (items.length === 0) { throw new Error('在庫がありません'); }
+    if (items[0].getCash() > cash) { throw new Error('お金が足りません'); }
+    const item =this.items.splice(this.items.indexOf(items[0]), 1);
     return item;
   }
 
   canBuy(productName) {
-    const item = this.findItemList(productName);
-    return Boolean(item.includes(item[0]));
+    const items = this.findItemList(productName);
+    return Boolean(items.length > 0);
   }
 }
 
 const vending = new VendingMachine;
-
+console.log(new Item("コカコーラ", 120))
 vending.addItem(new Item("コカコーラ", 120), 3);
 vending.addItem(new Item("オレンジ", 200), 1);
 vending.addItem(new Item("水", 80), 2);
+vending.addItem(new Item("水", 40), 2);
 console.log(vending)
 
 const buyItem1 = vending.buy("コカコーラ", 120);
