@@ -1,18 +1,18 @@
 class Item {
-  #itemName
-  #price
+  #prodactName
+  #cash
 
-  constructor(itemName, price){
-    this.#itemName = itemName;
-    this.#price = price;
+  constructor(prodactName, cash){
+    this.#prodactName = prodactName;
+    this.#cash = cash;
   }
 
   getItemName() {
-    return this.#itemName
+    return this.#prodactName
   }
 
   getPrice() {
-    return this.#price
+    return this.#cash
   }
 }
 
@@ -20,4 +20,10 @@ class VendingMachine {
   constructor() {
     this.items = [];
   }
+
+  // 商品の追加
+  addItem(item) {
+    this.items.push(item);
+  }
+  // 在庫確認
 }
