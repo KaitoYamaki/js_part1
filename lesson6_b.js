@@ -6,47 +6,39 @@ class PointCalculator {
   }
 
   sumPoint() {
-    let sumPoint = 0;
-    for (let i = 0; i < this.#results.length; i++) {
-      sumPoint += this.#results[i].point;
-    }
+    let sumPoint = this.#results.reduce(function (sum, value) {
+      return sum + value.point
+    }, 0)
     return sumPoint;
   }
 
   avePoint() {
-    let sumPoint = this.sumPoint();
+    const sumPoint = this.sumPoint();
     let avePoint = 0;
-    for (let i = 0; i < this.#results.length; i++) {
-      avePoint = sumPoint/this.#results.length;
-    }
+    avePoint = sumPoint/this.#results.length;
     return avePoint;
   }
 
   maxHuman() {
-    let max = 0;
-    let maxHuman = 0;
-    for (let i = 0; i < this.#results.length; i++) {
-      if (max < this.#results[i].point ) {
-        max = this.#results[i].point;
-        maxHuman = this.#results[i].name;
-      }
-    }
-    return maxHuman;
+    let max = this.#results.reduce(function (max, value) {
+      return max.point > value.point ? max : value;
+    }, 0)
+    return max.name;
   }
 
   addHuman(result) {
     this.#results.push(result);
-    let sumPoint = this.sumPoint();
-    let avePoint = this.avePoint();
-    let maxHuman = this.maxHuman();
-    return [sumPoint,avePoint,maxHuman];
+    const sumPoint = this.sumPoint();
+    const avePoint = this.avePoint();
+    const maxHuman = this.maxHuman();
+    return [sumPoint, avePoint, maxHuman];
   }
 }
 
-let results = [{ name: '鈴木', point: 80 }, { name: '田中', point: 92 }, { name: '佐藤', point: 75 }];
-const point = new PointCalculator(results);
+const results = [{ name: '鈴木', point: 80 }, { name: '田中', point: 92 }, { name: '佐藤', point: 75 }];
+const pointCalculator = new PointCalculator(results);
 
-console.log(point.sumPoint());
-console.log(point.avePoint());
-console.log(point.maxHuman());
-console.log(point.addHuman({ name: '阿部', point: 95 }));
+console.log(pointCalculator.sumPoint());
+console.log(pointCalculator.avePoint());
+console.log(pointCalculator.maxHuman());
+console.log(pointCalculator.addHuman({ name: '阿部', point: 95 }));
